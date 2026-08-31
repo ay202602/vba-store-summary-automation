@@ -57,5 +57,6 @@ $RECYCLE.BIN/
 # Xlflow
 .xlflow/
 workbook/
+xlflow.toml
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode
