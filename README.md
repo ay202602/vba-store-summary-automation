@@ -87,5 +87,3 @@ vba-store-summary-automation
     └── modules
          └── StoreSummary.bas    # メインプログラム（標準モジュール）
 ```
-## store_sales_dummy.xlsmについて
-すべて架空のデータであり、実際の企業や団体とは無関係です。
