@@ -70,18 +70,22 @@
 | 入力値の不正（複数想定） | `Collection` にエラーメッセージを蓄積し、全行チェック後にまとめて表示して停止 | シート名・セル位置 | `errList` |
 | クラス内の不正値 | `Err.Raise` を `Errhandler` で受け取り、MsgBox で表示 | `Err.Description` | `Case vbObjectError + 1 To vbObjectError + 8` |
 | 想定外のエラー | `On Error GoTo` を本処理全体に設定し、`Errhandler` へジャンプして停止 | エラー番号・内容・発生元・対象シート・対象セル | `Case Else` |
+
+## ディレクトリ構成
+
+```
+vba-store-summary-automation
 ├── build
 │   └── store_sales_dummy.xlsm  # Excelデータ（Claudeにて作成したダミーデータ）
 ├── image
 │   └── result.png  # 実行結果画像ファイル
-├── src
-│   └── classes # クラスモジュール
-│       ├── CComanpy.cls    # 店舗別のデータを総集計するクラス
-│       ├── Csale.cls       # 売上データをまとめるクラス
-│       └── Cstore.cls      # 売上データを店舗別に集計するクラス
-└── modules
-    └── Xlflow
-        └── StoreSummary.bas    # メインプログラム（標準モジュール）
+└── src
+    ├── classes # クラスモジュール
+    │   ├── CCompany.cls    # 店舗別のデータを総集計するクラス
+    │   ├── CSale.cls       # 売上データをまとめるクラス
+    │   └── CStore.cls      # 売上データを店舗別に集計するクラス
+    └── modules
+         └── StoreSummary.bas    # メインプログラム（標準モジュール）
 ```
 ## store_sales_dummy.xlsmについて
 すべて架空のデータであり、実際の企業や団体とは無関係です。
