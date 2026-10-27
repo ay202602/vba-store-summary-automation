@@ -41,17 +41,17 @@
 
 4. 標準モジュール内の `ProductSummary` をクリックし、実行する
 
-## 使用技術
+## 動作環境・使用技術
+> **動作環境**： Microsoft Excel Home and Business 2024 （マクロの有効化が必要）
 
-| 技術 | 用途 |
-|---|---|
-| VBA（Excel マクロ） | 集計処理本体 |
-| [Xlflow](https://github.com/harumiWeb/xlflow) | VBA を VS Code 上で編集・管理するフレームワーク |
-| クラス（`CCompany` / `CStore` / `CSale`） | 会社 → 店舗 → 売上の階層をオブジェクトで表現（コンポジション：クラスが他のクラスを部品として持つ構造） |
-| `Scripting.Dictionary` | 商品名をキーにした合計売上の集計 |
-| `Collection` | 売上・店舗・エラーメッセージの蓄積 |
-| `On Error` / `Err.Raise` | エラーハンドリング、クラス内の不正値通知 |
-| 配列での一括読み書き | シートへのアクセス回数を減らす |
+| 技術 | 内容 | 目的 | 該当箇所 |
+|---|---|---|---|
+| [Xlflow](https://github.com/harumiWeb/xlflow) | VBA を VS Code 上で編集・管理するフレームワーク | VBA をテキストファイルとして管理し、Git でバージョン管理する | `src/` 配下全体 |
+| クラス（`CCompany` / `CStore` / `CSale`） | 会社 → 店舗 → 売上の階層をオブジェクトで表現（コンポジション：クラスが他のクラスを部品として持つ構造） | データの構造と役割を分け、保守しやすくする | `src/classes/` |
+| `Scripting.Dictionary` | 商品名をキーに合計売上を加算 | 同じ商品名の売上を重複なく集計する | `CCompany.SummarizeSalesByProduct` |
+| `Collection` | 売上・店舗・エラーメッセージを蓄積 | 件数が不定のデータを順に保持する | `CStore.mSales` / `CCompany.mStores` / `ProductSummary` の `errList` |
+| `On Error GoTo` / `Err.Raise` | `On Error GoTo` でエラーを受け取り、`Err.Raise` でクラス内の不正値を通知 | 想定外エラー・不正値を検知し、原因を表示して安全に停止する | `ProductSummary` の `Errhandler` / `CSale` の各 `Property Let` |
+| 配列での一括読み書き | シートの範囲を配列に読み込み、集計結果も配列で一括書き込み | シートへのアクセス回数を減らし、処理を速くする | `ProductSummary`（`data` / `wsData`） |
 
 ## 設計意図
 ### 標準モジュールとクラスモジュールにバリデーションを2重設計
