@@ -1,4 +1,5 @@
-# store-summary-vba-automation
+# vba-store-summary-automation
+
 ## 概要
 - 各店舗の売上データを集計し、専用ワークシートにて転記するシステムです。
 ## 実行結果
